@@ -13,6 +13,7 @@ export class TeacherTableComponent implements OnInit {
   faPlus = faPlus;
   faPenSquare = faPenSquare;
   teacherData: any;
+  originalTeacherData: any;
   selected: any;
 
   constructor(private service: AppServiceService, private router: Router) { }
@@ -61,16 +62,12 @@ export class TeacherTableComponent implements OnInit {
   }
 
   search(value) {
-    let foundItems = [];
     if (value.length <= 0) {
-      this.getTeacherData();
+      this.teacherData = [...this.originalTeacherData];
     } else {
-      let b = this.teacherData.filter((teacher) => {
-        if (teacher[0].name.toLowerCase().indexOf(value) > -1) {
-          foundItems.push(teacher)
-        }
+      this.teacherData = this.originalTeacherData.filter((teacher) => {
+        return teacher[0].name.toLowerCase().includes(value.toLowerCase());
       });
-      this.teacherData = foundItems;
     }
   }
 
