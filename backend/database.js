@@ -37,7 +37,7 @@ const readTeachers = async () => {
 }
 
 const readTeacherInfo = async (id) => {
-    const sql = `dummy_data`
+    const sql = `SELECT * FROM teacher WHERE id = ?`
     return new Promise((resolve, reject) => {
         knex_db
             .raw(sql, [id])
@@ -161,6 +161,7 @@ const deleteStudent = async (id) => {
             });
     });
 }
+
 
 module.exports = {
     readTeachers,
